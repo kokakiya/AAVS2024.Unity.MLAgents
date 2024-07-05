@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System;
 using TMPro;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
@@ -12,8 +13,10 @@ public class TrainingSettings : MonoBehaviour
 {
     [HideInInspector]
     public GameObject[] agents;
+
     [HideInInspector]
     public TrainArea[] trainListArea;
+
     [HideInInspector]
     public float totalScore;
 
@@ -21,6 +24,8 @@ public class TrainingSettings : MonoBehaviour
 
     public TMP_Text statusLabel;
 
+    public string LogFilePath = "output";
+    public DateTime Session = DateTime.Now;
 
     StatsRecorder m_Recorder;
 
@@ -43,7 +48,6 @@ public class TrainingSettings : MonoBehaviour
 
         agents = GameObject.FindGameObjectsWithTag("agent");
 
-
         trainListArea = FindObjectsOfType<TrainArea>();
         foreach (var fa in trainListArea)
         {
@@ -61,14 +65,21 @@ public class TrainingSettings : MonoBehaviour
         }
     }
 
+    string getSession()
+    {
+        var dt = DateTime.Now;
+        return dt.ToString("MMdd-HHmmss");
+    }
+
     public void writeAllFiles()
     {
         var listOfLogger = FindObjectsOfType<ATLogger>();
+        var session = getSession();
         foreach (var logger in listOfLogger)
         {
-            logger.WriteCSV();
-            logger.WriteSVGPath();
-            logger.WriteSVGDurationBubble();
+            logger.WriteCSV(session);
+            logger.WriteSVGPath(session);
+            logger.WriteSVGDurationBubble(session);
         }
     }
 
@@ -77,23 +88,25 @@ public class TrainingSettings : MonoBehaviour
         var listOfLogger = FindObjectsOfType<ATLogger>();
         foreach (var logger in listOfLogger)
         {
-            logger.WriteCSV();
+            logger.WriteCSV(getSession());
         }
     }
+
     public void writePathFiles()
     {
         var listOfLogger = FindObjectsOfType<ATLogger>();
         foreach (var logger in listOfLogger)
         {
-            logger.WriteSVGPath();
+            logger.WriteSVGPath(getSession());
         }
     }
+
     public void writeBubbleChartFiles()
     {
         var listOfLogger = FindObjectsOfType<ATLogger>();
         foreach (var logger in listOfLogger)
         {
-            logger.WriteSVGDurationBubble();
+            logger.WriteSVGDurationBubble(getSession());
         }
     }
 
@@ -105,8 +118,8 @@ public class TrainingSettings : MonoBehaviour
         }
 
         activeCamera.enabled = true;
-
     }
+
     public void Update()
     {
         var list = FindObjectsOfType<VisionTestAgent>();
@@ -121,7 +134,6 @@ public class TrainingSettings : MonoBehaviour
         }
         statusLabel.text = data.ToString();
 
-
         // Send stats via SideChannel so that they'll appear in TensorBoard.
         // These values get averaged every summary_frequency steps, so we don't
         // need to send every Update() call.
@@ -131,4 +143,3 @@ public class TrainingSettings : MonoBehaviour
         }
     }
 }
-

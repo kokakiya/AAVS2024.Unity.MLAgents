@@ -754,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2615879892825617598, guid: 122a12d4a50cd114e81dc32765be3c70,
         type: 3}
-      propertyPath: LogPath
+      propertyPath: positionRadiusThreshold
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3975140772492545365, guid: 122a12d4a50cd114e81dc32765be3c70,
@@ -1319,9 +1319,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 66ef9d07a49c5f84ab2a7cdf4503acf5, type: 3}
-        m_TargetAssemblyTypeName: UIUpdater, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1574236050}
+        m_TargetAssemblyTypeName: TrainingSettings, Assembly-CSharp
+        m_MethodName: writePathFiles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1452,9 +1452,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 66ef9d07a49c5f84ab2a7cdf4503acf5, type: 3}
-        m_TargetAssemblyTypeName: UIUpdater, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1574236050}
+        m_TargetAssemblyTypeName: TrainingSettings, Assembly-CSharp
+        m_MethodName: writeAllFiles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1634,9 +1634,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 66ef9d07a49c5f84ab2a7cdf4503acf5, type: 3}
-        m_TargetAssemblyTypeName: UIUpdater, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1574236050}
+        m_TargetAssemblyTypeName: TrainingSettings, Assembly-CSharp
+        m_MethodName: writePathFiles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
